@@ -1,22 +1,21 @@
 /*
  * Create a list that holds all of your cards
  */
-var openCardsList = [], openCardStatus = false;
-var cardsList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
-var openCount = 0, clickCount = 0, time = 0, timeoutPtr;
+let openCardsList = [], openCardStatus = false;
+let cardsList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
+let openCount = 0, clickCount = 0, time = 0, timeoutPtr;
 
-var movesText = document.getElementsByClassName('moves')[0];
-var modalDisplay = document.querySelectorAll('.modal')[0].style;
-var timerEle = document.getElementsByClassName('timer')[0];
+const movesText = document.getElementsByClassName('moves')[0];
+const modalDisplay = document.querySelectorAll('.modal')[0].style;
+const timerEle = document.getElementsByClassName('timer')[0];
 
 function init() {
     openCardsList.length = 0, openCardStatus = false;
     cardsList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
     openCount = 0, clickCount = 0, time = 0;
     cardsList = shuffle(cardsList.concat(cardsList));
-    var cards = document.querySelectorAll('.card');
-    var deck = document.querySelectorAll('.deck > li');
-    for (var i = 0; i < cardsList.length; i++) {
+    const cards = document.querySelectorAll('.card');
+    for (let i = 0; i < cardsList.length; i++) {
         cards[i].children[0].classList = cardsList[i];
         cards[i].className = 'card';
         cards[i].addEventListener('click', eventListenerForCards);
@@ -40,7 +39,7 @@ init();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -65,9 +64,9 @@ function shuffle(array) {
  */
 
 function eventListenerForCards() {
-    var className = event.target.children[0].className;
+    let className = event.target.children[0].className;
     if (openCardsList.indexOf(className) != -1) {
-        var element = document.getElementsByClassName(className);
+        let element = document.getElementsByClassName(className);
         element[0].parentElement.className = element[1].parentElement.className = 'card open match disable';
         openCardStatus = false;
         openCount++;
@@ -91,7 +90,7 @@ function eventListenerForCards() {
 
 function closeOtherCards() {
     setTimeout(function () {
-        var elements = document.querySelectorAll('.card.open.show');
+        const elements = document.querySelectorAll('.card.open.show');
         for (let i = 0; i < elements.length; i++) {
             elements[i].className = "card";
         }
@@ -102,8 +101,8 @@ function closeOtherCards() {
 
 function setEventListnerReset() {
     document.getElementsByClassName('restart')[0].addEventListener('click', function () {
-        var cardsList = document.querySelectorAll('.card.open.match.disable');
-        for (var i = 0; i < cardsList.length; i++) {
+        const cardsList = document.querySelectorAll('.card.open.match.disable');
+        for (let i = 0; i < cardsList.length; i++) {
             cardsList[i].className = 'card';
         }
         init();
@@ -116,12 +115,12 @@ function setTimer() {
 }
 
 function updateStart() {
-    var stars = document.getElementsByClassName('fa fa-star');
+    const stars = document.getElementsByClassName('fa fa-star');
     stars[stars.length - 1].className = 'fa fa-star-o';
 }
 
 function setStars() {
-    var star = document.getElementsByClassName('stars');
+    const star = document.getElementsByClassName('stars');
     star[0].innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
 }
 
@@ -130,7 +129,6 @@ function updateClickCount() {
 }
 
 function endGame() {
-    debugger;
     document.getElementsByClassName('modal-close')[0].addEventListener('click', 
         function() {
             init();
