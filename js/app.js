@@ -18,7 +18,7 @@ function init() {
     var deck = document.querySelectorAll('.deck > li');
     for (var i = 0; i < cardsList.length; i++) {
         cards[i].children[0].classList = cardsList[i];
-        deck[0].childNodes[i].className = 'card';
+        cards[i].className = 'card';
         cards[i].addEventListener('click', eventListenerForCards);
     }
     clearTimeout(timeoutPtr);
@@ -65,7 +65,6 @@ function shuffle(array) {
  */
 
 function eventListenerForCards() {
-    updateClickCount();
     var className = event.target.children[0].className;
     if (openCardsList.indexOf(className) != -1) {
         var element = document.getElementsByClassName(className);
@@ -81,15 +80,13 @@ function eventListenerForCards() {
             closeOtherCards();
         }
         openCardsList.push(className);
-        event.target.className = 'card open show';
+        event.target.className = 'card open show disable';
         openCardStatus = true;
     }
     if(clickCount == 14 || clickCount == 20) {
         updateStart();
     }
-    if (clickCount == 1) {
-        endGame();
-    }
+    updateClickCount();
 }
 
 function closeOtherCards() {

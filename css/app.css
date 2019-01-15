@@ -144,3 +144,7 @@ h1 {
 .modal-close {
     float: right;
 }
+
+.padding-20 {
+    padding: 20px;
+}
